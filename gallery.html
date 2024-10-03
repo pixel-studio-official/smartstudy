@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Images</title>
+    <style>
+        body {
+            background: rgb(62, 62, 255);
+            background-repeat: no-repeat;
+            background-size: cover;
+            
+        }
+        img {
+            margin: 40px;
+            width: 350px;
+            border-radius: 20px;
+            border: 1px solid black;
+            justify-self: center;
+            transition: transform 0.28s;
+        }
+        img:hover {
+            transform: scale(1.2);
+        }
+        button {
+            display: block;
+            margin-top: 10px;
+        }
+        #images-container {
+            align-items: center;
+        }
+        #load:hover {
+            transform: scale(1.18);
+        }
+    </style>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="script/script.js"></script>
+</head>
+<body><center>
+    <img src="img/back.png" style="border: 0px;" onclick="goBack()" id="back" alt="back">
+    <div id="images-container"></div>
+    <img src="img/load_more.png" id="load" style="border: 0px; width:200px;" onclick="addIMG()">
+</center>
+
+    <script>
+        const imagesContainer = document.getElementById('images-container');
+        const addImageButton = document.getElementById('add-image-button');
+        let imageCount = 20;  // Starting with 20 images
+        var loc = hash;
+        // Function to load an image
+        function loadImage(imageNumber) {
+            const imgElement = document.createElement('img');
+            imgElement.src = loc + `/${imageNumber}.png`;
+            // imgElement.onclick = "location.href('" + `${imageNumber}.png` + "')";
+            // console.log("window.open('" + loc + `/${imageNumber}.png` + "')")
+
+            imgElement.addEventListener('click', () => {
+            window.open(loc + `/${imageNumber}.png`);
+        });
+
+            imgElement.onerror = () => {
+                // Remove broken image if the file doesn't exist
+                imgElement.remove();
+            };
+            imagesContainer.appendChild(imgElement);
+        }
+
+        // Load initial images
+        for (let i = 1; i <= imageCount; i++) {
+            loadImage(i);
+        }
+
+        // Add more images when button is clicked
+        function addIMG() {
+            imageCount++;
+            loadImage(imageCount);
+            imageCount++;
+            loadImage(imageCount);
+            imageCount++;
+            loadImage(imageCount);
+            imageCount++;
+            loadImage(imageCount);
+            imageCount++;
+            loadImage(imageCount);
+            
+        };
+    </script>
+    
+</body>
+</html>

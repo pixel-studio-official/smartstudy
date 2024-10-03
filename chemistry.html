@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="script/script.js"></script>
+    <style>
+        body {
+            background-image: url(img/chemistrybg.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: rgb(89, 0, 255);
+            font-size: larger;
+        }
+        .option {
+            text-align: left;
+            font-size: 400%;
+            
+            background-color: rgba(0, 0, 0, 0.1);
+            border: 2px solid black;
+            margin: 5px;
+            width: fit-content;
+            border-radius: 40px;
+        }
+        .option:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <img src="img/back.png" onclick="goBack()" id="back" alt="back">
+    <center>
+    <div class="option" onclick="location.href='search.html#chem++Matter_In_Our_Surroundings'">1) Matter In Our Surroundings</div>  
+    <div class="option" onclick="location.href='search.html#chem++Is_Matter_Around_Us_Pure'">2) Is Matter Around Us Pure</div>  
+    <div class="option" onclick="location.href='search.html#chem++Atoms_And_Molecules'">3) Atoms And Molecules</div>  
+    <div class="option" onclick="location.href='search.html#chem++Structure_Of_The_Atom'">4) Structure Of The Atom</div>
+    
+    </center>
+</body>
+</html>

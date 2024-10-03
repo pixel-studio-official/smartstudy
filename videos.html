@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Gallery</title>
+    <style>
+        body {
+            background: url(img/ytbg.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .video {
+            margin: 20px 0;
+        }
+        #addVideoButton {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #addVideoButton:hover {
+            background-color: #45a049;
+        }
+        .inputField {
+            margin: 10px 0;
+        }
+        .video-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .video {
+            width: 45%; /* Adjust this width as needed */
+            margin-bottom: 20px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 315px;
+        }
+        #videoLink {
+            background: transparent;
+            font-size: 130%;
+            border-radius: 30px;
+            border: 2px solid red;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>YouTube Video Gallery</h1>
+        <h1 id="pageTitle"></h1>
+        <div id="videoContainer" class="video-grid">
+            <!-- Videos will be added here -->
+        </div>
+        <div class="inputField">
+            <!-- <input type="text" id="videoLink" placeholder="Enter YouTube video link" /> -->
+            <!-- <button id="addVideoButton">+</button> -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash.substring(1); // Get hash without the '#'
+            document.getElementById('pageTitle').innerText = hash.replace(/_/g, ' '); // Set the title as the hash
+
+            loadVideos(hash);
+
+            document.getElementById('addVideoButton').addEventListener('click', function() {
+                var videoLink = document.getElementById('videoLink').value;
+                if (videoLink) {
+                    var videoId = getVideoId(videoLink);
+                    if (videoId) {
+                        addVideo(videoId);
+                        saveVideoLink(videoLink, hash);
+                        document.getElementById('videoLink').value = '';
+                    } else {
+                        alert('Invalid YouTube link');
+                    }
+                } else {
+                    alert('Please enter a YouTube video link');
+                }
+            });
+        });
+
+        // Extract the YouTube video ID from the link
+        function getVideoId(link) {
+            var videoId = link.split('v=')[1];
+            if (videoId) {
+                var ampersandPosition = videoId.indexOf('&');
+                if (ampersandPosition != -1) {
+                    videoId = videoId.substring(0, ampersandPosition);
+                }
+                return videoId;
+            }
+            return null;
+        }
+
+        // Load videos from both JSON and localStorage
+        function loadVideos(hash) {
+            var videoFile = 'sources/' + hash + '/videos.json'; // Path based on hash
+            fetch(videoFile)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(videos => {
+                    videos.forEach(function(link) {
+                        var videoId = getVideoId(link);
+                        if (videoId) {
+                            addVideo(videoId);
+                        }
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+
+            // Load saved links from localStorage
+            var savedLinks = JSON.parse(localStorage.getItem(hash)) || [];
+            savedLinks.forEach(link => {
+                var videoId = getVideoId(link);
+                if (videoId) {
+                    addVideo(videoId);
+                }
+            });
+        }
+
+        // Add video to the page
+        function addVideo(videoId) {
+            var iframe = document.createElement('iframe');
+            iframe.src = "https://www.youtube.com/embed/" + videoId;
+            iframe.frameBorder = "0";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+            iframe.allowFullscreen = true;
+
+            var videoContainer = document.getElementById('videoContainer');
+            var videoDiv = document.createElement('div');
+            videoDiv.className = 'video';
+            videoDiv.appendChild(iframe);
+            videoContainer.appendChild(videoDiv);
+        }
+
+        // Save video link in localStorage
+        function saveVideoLink(link, hash) {
+            var savedLinks = JSON.parse(localStorage.getItem(hash)) || [];
+            savedLinks.push(link);
+            localStorage.setItem(hash, JSON.stringify(savedLinks));
+            console.log('Video link saved locally.');
+        }
+    </script>
+</body>
+</html>

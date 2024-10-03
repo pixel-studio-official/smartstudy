@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="script/script.js"></script>
+    <style>
+        body {
+            background-image: url(img/education.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: yellow;
+            font-size: larger;
+        }
+        .option {
+            align-self: center;
+            width: 20%;
+            border: 2px solid black;
+            border-radius: 50px;
+            transition: transform .3s;
+            margin: 30px;
+        }
+        .option:hover {
+            transform: scale(1.2);
+        }
+    </style>
+    <script>
+        // openFullscreen();
+    </script>
+</head>
+<body>
+    <img src="img/back.png" onclick="goBack()" id="back" alt="back">
+    <center>
+        <!-- <div class="box", id="physics"><h1></h1></div>
+        <div class="box", id="chemistry"><h1></h1></div>
+        <div class="box", id="biology"><h1></h1></div> -->
+        <br><br><br>
+        <a href="physics.html"><img class="option" id="" src="img/physics1.png" alt=""></a>
+        <a href="chemistry.html"><img class="option" id="" src="img/chemistry.png" alt=""></a><br>
+        <a href="biology.html"><img class="option" id="" src="img/biology.png" alt=""></a>
+        
+    </center>
+</body>
+</html>

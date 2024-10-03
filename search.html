@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="tit">Science</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="script/script.js"></script>
+    <style>
+        body {
+            background-image: url(img/education.jpg);
+            background-repeat: no-repeat;
+            background-size: 50%;
+            color: yellow;
+            font-size: larger;
+            /* display:block; */
+}
+        .option {
+            align-self: center;
+            /* height: 320px; */
+            width: 15%;
+            border-radius: 50px;
+            transition: transform .4s;
+            margin: 25px;
+        }
+        .option:hover {
+            transform: scale(1.2);
+        }
+        #title {
+            font-size: 50px;
+            color: black;
+            background-color: rgba(255, 0, 221, 0.4);
+            width:fit-content;
+            border-radius: 50px;
+        }
+        #extra {
+            width: 100px;
+            border-radius: 50px;
+            transition: transform .4s;
+            margin: 25px;
+            float: right;
+            margin-bottom: 0px;
+            bottom: 0px;
+        }
+        #extra:hover {
+            transform: scale(0.7);
+            
+        }
+    </style>
+</head>
+<body id="body">
+    <img src="img/back.png" onclick="goBack()" id="back" alt="back">
+    <center>
+        <h1 id="title">failed to load chapter</h1><br>
+        <a title="textbook" id="loctextbook"><img onclick="load('textbook', 'sciencetb.pdf')" class="option" id="" src="img/book.png" alt="TextBook"></a>
+        <a title="Notes" id="locnotes"><img onclick="loadfile('notes', tag, '.pdf')" class="option" id="" src="img/notes.png" alt="Notes"></a>
+        <a title="Gallery" id="locgallery"><img onclick="lfile('gallery', tag, '.html')" class="option" id="" src="img/gallery.png" alt=""></a><br>
+        <a title="Whiteboard" target="_blank" id="locboard" href="https://www.whiteboard.team/app/board/new"><img class="option" id="" src="img/whiteboard.png" alt=""></a>
+        <a title="Lesson" id="loclesson"><img onclick="loadfile('lesson', tag, '_lesson.pdf')" class="option" id="" src="img/lesson.png" alt=""></a>
+        <a title="Test" id="loctest"><img onclick="loadfolder('test', '', tag, 'test/')" class="option" id="" src="img/test.png" alt=""></a>
+        <a title="extra" id="locextra"><img onclick="loadfolder('extra', '', tag, 'extra/')" id="extra" src="img/extra.png" alt="EXTRA"></a><br>
+        <a title="Videos" id="locvideos"><img onclick="loadf('videos', 'videos.html#')" class="option" id="" src="img/videos.png" alt=""></a>
+        <a title="ChatGPT" target="_blank" id="locboard" href="https://www.chatgpt.com/"><img class="option" id="" src="img/chatgpt.png" alt=""></a>
+    </center>
+    <script>
+        document.getElementById("title").innerHTML = "Chapter Name: " + tag;
+
+        function loadfile(kind, tag, ext) {
+            document.getElementById("loc" + kind).href = "sources/" + tag + "/" + tag + ext;
+        }
+
+        function lfile(kind, tag, ext) {
+            document.getElementById("loc" + kind).href = kind + ext + "#sources/" + tag + "/" + kind;
+        }
+
+        
+
+        function loadfolder(idd, kind, tag, filename) {
+            document.getElementById("loc" + idd).href = "sources/" + tag + "/" + kind + "/" + filename;
+        }
+        
+
+        function load(kind, name) {
+            document.getElementById("loc" + kind).href = "sources/" + kind + "/" + name;
+        }
+        function loadf(kind, name) {
+            document.getElementById("loc" + kind).href = name + tag;
+        }
+
+        if (sub == "bio") {
+            document.getElementById("body").style.background = "url(img/biologybg.jpg)";
+            document.getElementById("body").style.backgroundRepeat = "no-repeat";
+            document.getElementById("body").style.backgroundSize = "cover";
+            document.getElementById("tit").innerHTML = "Biology";
+        } else if (sub == "phy") {
+            document.getElementById("body").style.background = "url(img/physicsbg.jpg)";
+            document.getElementById("body").style.backgroundRepeat = "no-repeat";
+            document.getElementById("body").style.backgroundSize = "cover";
+            document.getElementById("tit").innerHTML = "Physics";
+        } else if (sub == "chem") {
+            document.getElementById("body").style.background = "url(img/chemistrybg.jpg)";
+            document.getElementById("body").style.backgroundRepeat = "no-repeat";
+            document.getElementById("body").style.backgroundSize = "cover";
+            document.getElementById("tit").innerHTML = "Biology";
+        } else {
+            document.getElementById("body").style.background = "url(img/education.jpg)";
+            document.getElementById("body").style.backgroundRepeat = "no-repeat";
+            document.getElementById("body").style.backgroundSize = "cover";
+
+        }
+
+    </script>
+    
+</body>
+</html>
